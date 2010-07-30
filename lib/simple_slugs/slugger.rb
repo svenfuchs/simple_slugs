@@ -1,6 +1,7 @@
 module SimpleSlugs
   class Slugger < ActiveSupport::InheritableOptions
     DEFAULTS = {
+      :slug_name => :slug,
       :on_blank  => true,
       :scope     => nil,
       :separator => '-'
@@ -14,13 +15,19 @@ module SimpleSlugs
     end
     
     def unique_slug!(record)
-      slug = base_slug = record.read_attribute(source).to_slug
-      taken_slugs, n = self.taken_slugs(record, slug), 0
-      slug = [base_slug, separator, n += 1].join while taken_slugs.include?(slug)
-      record.slug = slug
+      if record.send(:read_attribute, slug_name).blank? || !on_blank
+        slug = record.send(source).to_slug
+        record.slug = ensure_unique_slug(record, slug)
+      end
     end
   
     protected
+    
+      def ensure_unique_slug(record, base)
+        slug, taken, n = base, self.taken_slugs(record, base), 0
+        slug = [base, separator, n += 1].join while taken.include?(slug)
+        slug
+      end
     
       def taken_slugs(record, slug)
         condition = model.arel_table[:slug].matches("#{slug}%")

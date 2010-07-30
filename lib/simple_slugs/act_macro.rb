@@ -3,9 +3,7 @@ module SimpleSlugs
     def has_slug(options = {})
       return if has_slug?
 
-      include SimpleSlugs
-
-      before_validation :set_slug
+      before_validation lambda { |record| record.slugger.unique_slug!(record) }
 
       class_inheritable_accessor :slugger
       self.slugger = Slugger.new(self, options)
