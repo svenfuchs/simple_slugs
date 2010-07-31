@@ -1,7 +1,3 @@
-config = { 'adapter' => 'sqlite3', 'database' => ':memory:' }
-ActiveRecord::Base.configurations = { 'test' =>  config }
-ActiveRecord::Base.establish_connection(config)
-
 ActiveRecord::Migration.verbose = false
 
 ActiveRecord::Schema.define :version => 0 do

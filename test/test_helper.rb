@@ -14,14 +14,11 @@ require 'i18n'
 $:.unshift Pathname.local('../lib').to_s
 require 'simple_slugs'
 
-config = { 'adapter' => 'sqlite3', 'database' => ':memory:' }
-ActiveRecord::Base.configurations = { 'test' =>  config }
-ActiveRecord::Base.establish_connection(config)
-
 log = '/tmp/simple_slugs_test.log'
 FileUtils.touch(log) unless File.exists?(log)
 ActiveRecord::Base.logger = Logger.new(log)
 ActiveRecord::LogSubscriber.attach_to(:active_record)
+ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => ':memory:')
 
 DatabaseCleaner.strategy = :truncation
 
