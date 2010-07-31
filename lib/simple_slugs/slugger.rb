@@ -15,7 +15,7 @@ module SimpleSlugs
     end
     
     def unique_slug!(record)
-      if record.send(:read_attribute, slug_name).blank? || !on_blank
+      if record.send(slug_name).blank? || !on_blank
         slug = record.send(source).to_slug
         record.slug = ensure_unique_slug(record, slug)
       end
