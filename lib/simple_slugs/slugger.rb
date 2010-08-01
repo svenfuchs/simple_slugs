@@ -16,8 +16,9 @@ module SimpleSlugs
 
     def unique_slug!(record)
       if record.send(slug_name).blank? || !on_blank
-        slug = record.send(source).to_slug
-        record.slug = ensure_unique_slug(record, slug)
+        source = record.send(self.source)
+        source || raise("can not generate a slug for #{record.inspect} because #{self.source} is #{source.inspect}")
+        record.slug = ensure_unique_slug(record, source.to_slug)
       end
     end
 
