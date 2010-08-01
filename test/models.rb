@@ -11,6 +11,16 @@ ActiveRecord::Schema.define :version => 0 do
     t.string :title
     t.string :slug
   end
+
+  create_table :translated_things, :force => true do |t|
+  end
+
+  create_table :translated_thing_translations, :force => true do |t|
+    t.references :translated_thing
+    t.string :locale
+    t.string :title
+    t.string :slug
+  end
 end
 
 class Post < ActiveRecord::Base
@@ -19,4 +29,9 @@ end
 
 class ScopedThing < ActiveRecord::Base
   has_slug :scope => :scope_id
+end
+
+class TranslatedThing < ActiveRecord::Base
+  has_slug
+  translates :title, :slug
 end

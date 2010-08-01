@@ -10,6 +10,7 @@ require 'pathname_local'
 require 'test_declarative'
 require 'database_cleaner'
 require 'i18n'
+require 'globalize'
 
 $:.unshift Pathname.local('../lib').to_s
 require 'simple_slugs'
