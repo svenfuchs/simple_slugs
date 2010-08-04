@@ -1,3 +1,6 @@
+require 'active_support/ordered_options'
+require 'active_support/core_ext/hash/reverse_merge'
+
 module SimpleSlugs
   class Slugger < ActiveSupport::InheritableOptions
     DEFAULTS = {
