@@ -20,8 +20,7 @@ module SimpleSlugs
     def unique_slug!(record)
       if record.send(slug_name).blank? || !on_blank
         source = record.send(self.source)
-        source || raise("can not generate a slug for #{record.inspect} because #{self.source} is #{source.inspect}")
-        record.slug = ensure_unique_slug(record, source.to_slug)
+        record.slug = ensure_unique_slug(record, source.to_slug) if source
       end
     end
 
@@ -63,7 +62,7 @@ module SimpleSlugs
       end
 
       def translated?
-        model.translated_attribute_names.include?(:slug) rescue false
+        model.try(:translated?, :slug)
       end
   end
 end
