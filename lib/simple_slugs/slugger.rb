@@ -62,7 +62,7 @@ module SimpleSlugs
       end
 
       def translated?
-        model.try(:translated?, :slug)
+        model.respond_to?(:translated?) ? model.translated?(:slug) : false
       end
   end
 end
