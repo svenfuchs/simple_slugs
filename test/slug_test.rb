@@ -50,4 +50,8 @@ class SlugTest < Test::Unit::TestCase
     I18n.locale = :de
     assert_equal 'juergen-mueller', Slug.new('Jürgen Müller')
   end
+  
+  test "strips colons from strings" do
+    assert_equal 'foo-bar', Slug.new('foo: bar')
+end
 end
