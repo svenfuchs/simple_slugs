@@ -53,5 +53,10 @@ class SlugTest < Test::Unit::TestCase
   
   test "strips colons from strings" do
     assert_equal 'foo-bar', Slug.new('foo: bar')
-end
+  end
+
+  test "compresses multiple spaces to single spaces" do
+    assert_equal 'foo-bar', Slug.new('foo    bar')
+    assert_equal 'foo-bar', Slug.new('foo,    bar')
+  end
 end

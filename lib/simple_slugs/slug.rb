@@ -7,7 +7,6 @@ module SimpleSlugs
     
     def normalize
       transliterate
-      decolonize
       spacify
       strip!
       downcase!
@@ -20,10 +19,7 @@ module SimpleSlugs
     
     def spacify
       gsub!(/[\W_]/, ' ')
-    end
-
-    def decolonize
-      gsub!(/:/, '')
+      gsub!(/\s+/, ' ')
     end
     
     def dasherize
