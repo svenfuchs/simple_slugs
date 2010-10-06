@@ -4,25 +4,29 @@ module SimpleSlugs
       super
       normalize
     end
-    
+
     def normalize
-      transliterate
-      spacify
+      transliterate!
+      spacify!
+      join_spaces!
       strip!
       downcase!
-      dasherize
+      dasherize!
     end
-    
-    def transliterate
+
+    def transliterate!
       replace(I18n.transliterate(self))
     end
-    
-    def spacify
+
+    def spacify!
       gsub!(/[\W_]/, ' ')
+    end
+
+    def join_spaces!
       gsub!(/\s+/, ' ')
     end
-    
-    def dasherize
+
+    def dasherize!
       gsub!(' ', '-')
     end
   end

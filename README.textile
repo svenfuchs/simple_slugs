@@ -1,0 +1,45 @@
+h1. SimpleSlugs
+
+simple_slugs aims to be an as-simple-as-possible implementation of slugging/permalink functionality for ActiveRecord 3, but still be I18n-ready by providing transliteration support.
+
+h2. Usage
+
+simple_slugs adds an act_macro to activate slugging support for an ActiveRecord model:
+
+<pre>
+  class Post
+    has_slug
+  end
+</pre>
+
+simple_slugs has the following assumptions/defaults:
+
+* The model has a column named "slug" which is used for the slug.
+* The model has a column named "title" or "name" which is used as a source for the slug.
+* There's no scope to be taken into account when checking for uniqueness of slugs.
+* The slug only needs to be updated if the slug column is blank.
+
+You can overwrite these defaults as follows:
+
+<pre>
+  class Post
+    has_slug :slug_name => :permalink,  # use the permalink column for storing the slug
+             :source    => :heading,    # use the heading column as a source
+             :on_blank  => false,       # always update the slug
+             :scope     => :blog_id     # scope uniqueness of slugs to the current blog_id
+  end
+</pre>
+
+h2. Slugging
+
+simple_slugs performs the following operations on the source value (e.g. post.title):
+
+<pre>
+  transliterate! # using the current locale, e.g. German "Ä" => "Ae"
+  spacify!       # replace everything except word chars with spaces
+  join_spaces!   # replace duplicate spaces with single spaces
+  strip!         # strip leading and tailing spaces
+  downcase!      # downcase the string
+  dasherize!     # replace spaces with dashes
+</pre>
+
