@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.summary      = "Simple slugs for ActiveRecord"
   s.description  = "Simple slugs for ActiveRecord."
 
-  s.files        = Dir.glob("lib/**/**").split("\n")
+  s.files        = Dir.glob("lib/**/**")
   s.platform     = Gem::Platform::RUBY
   s.require_path = 'lib'
   s.rubyforge_project = '[none]'
