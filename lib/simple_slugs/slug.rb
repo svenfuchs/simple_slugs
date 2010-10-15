@@ -1,3 +1,6 @@
+require 'i18n'
+require 'active_support/core_ext/string'
+
 module SimpleSlugs
   class Slug < String
     def initialize(string)

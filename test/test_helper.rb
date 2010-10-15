@@ -3,16 +3,17 @@ ENV['RAILS_ENV'] = 'test'
 require 'rubygems'
 require 'test/unit'
 require 'fileutils'
-require 'active_record'
-require 'active_support'
 require 'logger'
-require 'pathname_local'
+require 'bundler/setup'
+
 require 'test_declarative'
 require 'database_cleaner'
+require 'active_record'
+require 'active_support'
 require 'i18n'
 require 'globalize'
 
-$:.unshift Pathname.local('../lib').to_s
+$:.unshift File.expand_path('../../lib', __FILE__)
 require 'simple_slugs'
 
 log = '/tmp/simple_slugs_test.log'
@@ -33,4 +34,4 @@ class Test::Unit::TestCase
   end
 end
 
-require Pathname.local('models')
+require File.expand_path('../models', __FILE__)
