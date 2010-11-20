@@ -17,12 +17,11 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.rubyforge_project = '[none]'
 
-  s.add_dependency 'activesupport'
+  s.add_dependency 'activerecord', '~> 3.0.3'
   s.add_dependency 'i18n'
 
   s.add_development_dependency 'test_declarative'
-  s.add_development_dependency 'database_cleaner'
-  s.add_development_dependency 'activerecord'
+  s.add_development_dependency 'database_cleaner', '0.5.2'
   s.add_development_dependency 'sqlite3-ruby'
   s.add_development_dependency 'globalize3'
 end
