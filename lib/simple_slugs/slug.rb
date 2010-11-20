@@ -8,6 +8,10 @@ module SimpleSlugs
       normalize
     end
 
+    def class
+      String
+    end
+
     def normalize
       transliterate!
       spacify!
